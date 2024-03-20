@@ -1,3 +1,4 @@
+import json
 from generate_mock_data import generate_data
 from upload_to_s3 import upload_to_s3
 from create_rds_schema import connect_and_create_db
@@ -18,7 +19,7 @@ def lambda_handler(event, context):
 
     # Connect to RDS, create customers database and customer_transactions table
     connect_and_create_db()
-    return
-
-
-lambda_handler('', date.today())
+    return {
+        'statusCode': 200,
+        'body': json.dumps(f'Customer Data Generated, Created new RDS DB and Table.')
+    }
