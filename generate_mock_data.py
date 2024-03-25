@@ -22,6 +22,7 @@ def generate_transaction(customer_name, current_date):
         card_number = f"{randint(1000, 9999)}-{randint(1000, 9999)}-{randint(1000, 9999)}-{randint(1000, 9999)}"
         bank_name = choice(bank_names)
         customer_info[customer_name] = {
+            "customer_id": randint(1000000000, 9999999999),  # 10-digit customer ID
             "debit_card_number": card_number,
             "debit_card_type": choice(card_types),
             "bank_name": bank_name,
@@ -49,7 +50,7 @@ def generate_transactions(num_transactions, current_date):
 def write_to_csv(data, filename):
     """Writes data to a CSV file"""
     with open(filename, "w", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=["name", "debit_card_number", "debit_card_type",
+        writer = csv.DictWriter(csvfile, fieldnames=["customer_id", "name", "debit_card_number", "debit_card_type",
                                                       "bank_name", "transaction_date", "amount_spend"])
         writer.writeheader()
         writer.writerows(data)
@@ -59,7 +60,7 @@ def write_to_csv(data, filename):
 def generate_data(current_date, date_str):
     """Generates data and creates csv files"""
     transactions = generate_transactions(transactions_per_day, current_date)
-    write_to_csv(transactions, f"/tmp/transactions_{date_str}.csv")
+    write_to_csv(transactions, f"./tmp/transactions_{date_str}.csv")
 
     print(f"Generated mock transaction data transactions_{date_str}.csv and saved in csv files")
     return
