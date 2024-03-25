@@ -5,7 +5,7 @@ from create_rds_schema import connect_and_create_db
 from datetime import date, timedelta
 
 # Define date range (modify as needed)
-start_date = date(2024, 3, 18)  # Adjust start date
+start_date = date(2024, 3, 23)  # Adjust start date
 end_date = date.today()
 
 
